@@ -1,0 +1,66 @@
+export const categories = [
+  {
+    id: 'mini-pancakes',
+    name: 'Mini Pancakes',
+    slug: 'mini-pancakes',
+    image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=600&q=80',
+    count: 8,
+    description: 'Bite-sized, fluffy mini pancakes drizzled with Belgian chocolate and fresh toppings.'
+  },
+  {
+    id: 'waffles',
+    name: 'Waffles',
+    slug: 'waffles',
+    image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=600&q=80',
+    count: 6,
+    description: 'Crispy on the outside, soft inside waffle pockets loaded with syrups & cream.'
+  },
+  {
+    id: 'cakes',
+    name: 'Cakes',
+    slug: 'cakes',
+    image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80',
+    count: 5,
+    description: 'Handcrafted celebration cakes, chocolate pull-up cakes, and pancake towers.'
+  },
+  {
+    id: 'pastries',
+    name: 'Pastries',
+    slug: 'pastries',
+    image: 'https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80',
+    count: 4,
+    description: 'Decadent multi-layered pastries infused with hazelnut, chocolate, and berries.'
+  },
+  {
+    id: 'brownies',
+    name: 'Brownies',
+    slug: 'brownies',
+    image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80',
+    count: 4,
+    description: 'Fudgy, melt-in-your-mouth brownies topped with chocolate drizzle and walnuts.'
+  },
+  {
+    id: 'milkshakes',
+    name: 'Milkshakes',
+    slug: 'milkshakes',
+    image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80',
+    count: 6,
+    description: 'Thick, creamy gourmet thickshakes topped with whipped cream and crumbles.'
+  },
+  {
+    id: 'hot-drinks',
+    name: 'Hot Drinks',
+    slug: 'hot-drinks',
+    image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=600&q=80',
+    count: 4,
+    description: 'Rich Belgian hot chocolate, hazelnut coffees, and aromatic warm beverages.'
+  },
+  {
+    id: 'cold-drinks',
+    name: 'Cold Drinks',
+    slug: 'cold-drinks',
+    image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80',
+    count: 4,
+    description: 'Refreshing iced coffees, fruit coolers, and sparkling berry mocktails.'
+  }
+];
