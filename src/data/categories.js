@@ -24,14 +24,6 @@ export const categories = [
     description: 'Handcrafted celebration cakes, chocolate pull-up cakes, and pancake towers.'
   },
   {
-    id: 'pastries',
-    name: 'Pastries',
-    slug: 'pastries',
-    image: 'https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80',
-    count: 4,
-    description: 'Decadent multi-layered pastries infused with hazelnut, chocolate, and berries.'
-  },
-  {
     id: 'brownies',
     name: 'Brownies',
     slug: 'brownies',
