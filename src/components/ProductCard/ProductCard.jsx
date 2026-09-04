@@ -8,8 +8,11 @@ import { formatPrice, calculateDiscount } from '../../utils/formatters';
 
 const ProductCard = ({ product }) => {
   const { addToCart, toggleWishlist, isInWishlist } = useCart();
-  const isFav = isInWishlist(product.id);
+  const productId = product._id || product.id;
+  const isFav = isInWishlist(productId);
   const discount = calculateDiscount(product.originalPrice, product.price);
+
+  const categoryName = typeof product.category === 'object' ? product.category?.name : (product.category || '');
 
   // 3D Tilt Effect State
   const [rotateX, setRotateX] = useState(0);
@@ -40,7 +43,7 @@ const ProductCard = ({ product }) => {
     >
       {/* Image Container */}
       <div className="relative aspect-square overflow-hidden rounded-2xl bg-gradient-to-tr from-amber-50 to-white">
-        <Link to={`/product/${product.id}`} className="block w-full h-full">
+        <Link to={`/product/${productId}`} className="block w-full h-full">
           <img
             src={product.image}
             alt={product.name}
@@ -61,7 +64,7 @@ const ProductCard = ({ product }) => {
         <motion.button
           whileTap={{ scale: 0.8 }}
           onClick={() => toggleWishlist(product)}
-          className="absolute top-3 right-3 w-9 h-9 rounded-full liquid-glass-pill flex items-center justify-center text-slate-700 hover:text-[#FF4D6D] shadow-md transition-colors"
+          className="absolute top-3 right-3 w-9 h-9 rounded-full liquid-glass-pill flex items-center justify-center text-slate-700 hover:text-[#FF4D6D] shadow-md transition-colors cursor-pointer"
           title={isFav ? "Remove from wishlist" : "Add to wishlist"}
         >
           {isFav ? (
@@ -81,7 +84,7 @@ const ProductCard = ({ product }) => {
         {/* Rating Badge */}
         <div className="absolute bottom-3 right-3 liquid-glass-dark text-white px-2.5 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-md">
           <FiStar className="text-[#FFB703] fill-[#FFB703] text-xs" />
-          <span>{product.rating}</span>
+          <span>{product.rating || '4.5'}</span>
         </div>
       </div>
 
@@ -89,7 +92,7 @@ const ProductCard = ({ product }) => {
       <div className="p-3 flex-1 flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between text-[11px] text-amber-900/60 font-semibold mb-1">
-            <span>{product.category}</span>
+            <span>{categoryName}</span>
             {product.prepTime && (
               <span className="flex items-center gap-1">
                 <FiClock className="text-xs" /> {product.prepTime}
@@ -97,7 +100,7 @@ const ProductCard = ({ product }) => {
             )}
           </div>
 
-          <Link to={`/product/${product.id}`}>
+          <Link to={`/product/${productId}`}>
             <h3 className="text-base font-extrabold text-[#2D2D2D] group-hover:text-[#FF4D6D] transition-colors line-clamp-1">
               {product.name}
             </h3>

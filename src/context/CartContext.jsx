@@ -3,6 +3,12 @@ import toast from 'react-hot-toast';
 
 const CartContext = createContext();
 
+const getProductId = (p) => {
+  if (!p) return '';
+  if (typeof p === 'string') return p;
+  return p._id || p.id || '';
+};
+
 export const CartProvider = ({ children }) => {
   // Load initial cart & wishlist from localStorage
   const [cartItems, setCartItems] = useState(() => {
@@ -24,27 +30,39 @@ export const CartProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    localStorage.setItem('99pancakes_cart', JSON.stringify(cartItems));
+    try {
+      localStorage.setItem('99pancakes_cart', JSON.stringify(cartItems));
+    } catch (e) {
+      console.error('[CartContext] Failed to save cart to localStorage:', e);
+    }
   }, [cartItems]);
 
   useEffect(() => {
-    localStorage.setItem('99pancakes_wishlist', JSON.stringify(wishlist));
+    try {
+      localStorage.setItem('99pancakes_wishlist', JSON.stringify(wishlist));
+    } catch (e) {
+      console.error('[CartContext] Failed to save wishlist to localStorage:', e);
+    }
   }, [wishlist]);
 
   // Add to Cart
   const addToCart = (product, quantity = 1) => {
+    if (!product) return;
+    const targetId = getProductId(product);
+
     setCartItems(prev => {
-      const existing = prev.find(item => item.product.id === product.id);
-      if (existing) {
+      const existingIndex = prev.findIndex(item => getProductId(item.product) === targetId);
+      if (existingIndex > -1) {
         toast.success(`Updated ${product.name} quantity in cart!`, {
           icon: '🥞',
           style: { background: '#5C3D2E', color: '#FFF8F0' }
         });
-        return prev.map(item =>
-          item.product.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        );
+        const updated = [...prev];
+        updated[existingIndex] = {
+          ...updated[existingIndex],
+          quantity: updated[existingIndex].quantity + quantity
+        };
+        return updated;
       }
       toast.success(`Added ${product.name} to your cart!`, {
         icon: '🍓',
@@ -56,22 +74,24 @@ export const CartProvider = ({ children }) => {
 
   // Remove from Cart
   const removeFromCart = (productId) => {
+    const targetId = getProductId(productId);
     setCartItems(prev => {
-      const itemToRemove = prev.find(item => item.product.id === productId);
+      const itemToRemove = prev.find(item => getProductId(item.product) === targetId);
       if (itemToRemove) {
         toast.error(`Removed ${itemToRemove.product.name} from cart`, {
           style: { background: '#2D2D2D', color: '#FFF8F0' }
         });
       }
-      return prev.filter(item => item.product.id !== productId);
+      return prev.filter(item => getProductId(item.product) !== targetId);
     });
   };
 
   // Update Quantity
   const updateQuantity = (productId, delta) => {
+    const targetId = getProductId(productId);
     setCartItems(prev => {
       return prev.map(item => {
-        if (item.product.id === productId) {
+        if (getProductId(item.product) === targetId) {
           const newQty = item.quantity + delta;
           return newQty > 0 ? { ...item, quantity: newQty } : item;
         }
@@ -83,15 +103,19 @@ export const CartProvider = ({ children }) => {
   // Clear Cart
   const clearCart = () => {
     setCartItems([]);
+    localStorage.removeItem('99pancakes_cart');
   };
 
   // Toggle Wishlist
   const toggleWishlist = (product) => {
+    if (!product) return;
+    const targetId = getProductId(product);
+
     setWishlist(prev => {
-      const exists = prev.some(item => item.id === product.id);
+      const exists = prev.some(item => getProductId(item) === targetId);
       if (exists) {
         toast('Removed from favorites', { icon: '🤍' });
-        return prev.filter(item => item.id !== product.id);
+        return prev.filter(item => getProductId(item) !== targetId);
       } else {
         toast.success(`Added ${product.name} to favorites!`, { icon: '❤️' });
         return [...prev, product];
@@ -100,12 +124,14 @@ export const CartProvider = ({ children }) => {
   };
 
   const isInWishlist = (productId) => {
-    return wishlist.some(item => item.id === productId);
+    if (!productId) return false;
+    const targetId = getProductId(productId);
+    return wishlist.some(item => getProductId(item) === targetId);
   };
 
   // Calculations
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const cartSubtotal = cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+  const cartSubtotal = cartItems.reduce((acc, item) => acc + Number(item.product?.price || 0) * item.quantity, 0);
   const deliveryFee = cartSubtotal === 0 ? 0 : cartSubtotal >= 499 ? 0 : 40;
   const taxes = Math.round(cartSubtotal * 0.05); // 5% GST
   const grandTotal = cartSubtotal + deliveryFee + taxes;

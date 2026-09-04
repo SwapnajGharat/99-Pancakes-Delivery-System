@@ -1,22 +1,35 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight } from 'react-icons/fi';
 import toast from 'react-hot-toast';
+import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
-  const navigate = useNavigate();
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleLogin = (e) => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const redirectPath = location.state?.from || '/';
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (email && password) {
-      toast.success('Successfully logged in!', { icon: '👋' });
-      navigate('/');
-    } else {
+    if (!email || !password) {
       toast.error('Please enter email and password');
+      return;
+    }
+
+    setSubmitting(true);
+    const result = await login(email, password);
+    setSubmitting(false);
+
+    if (result.success) {
+      navigate(redirectPath, { replace: true });
     }
   };
 
@@ -82,19 +95,27 @@ const Login = () => {
               />
               <span>Remember me</span>
             </label>
-            <a href="#forgot" onClick={(e) => { e.preventDefault(); toast('Password reset link sent to email!'); }} className="font-bold text-[#FF4D6D] hover:underline">
+            <a href="#forgot" onClick={(e) => { e.preventDefault(); toast('Password reset functionality is available via customer support.'); }} className="font-bold text-[#FF4D6D] hover:underline">
               Forgot password?
             </a>
           </div>
 
           <button
             type="submit"
-            className="w-full py-3.5 rounded-full bg-[#FF4D6D] hover:bg-[#E63956] text-white font-bold text-xs shadow-md shadow-[#FF4D6D]/30 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+            disabled={submitting}
+            className="w-full py-3.5 rounded-full bg-[#FF4D6D] hover:bg-[#E63956] text-white font-bold text-xs shadow-md shadow-[#FF4D6D]/30 transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
           >
-            <span>LOG IN TO YOUR ACCOUNT</span>
-            <FiArrowRight />
+            <span>{submitting ? 'LOGGING IN...' : 'LOG IN TO YOUR ACCOUNT'}</span>
+            {!submitting && <FiArrowRight />}
           </button>
         </form>
+
+        {/* Demo Admin & User Credentials Helper */}
+        <div className="p-3 bg-amber-50/70 border border-amber-200/60 rounded-2xl text-[11px] text-amber-900 space-y-1">
+          <p className="font-bold text-[#5C3D2E]">Quick Demo Logins:</p>
+          <p>👑 Admin: <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-amber-200">admin@99pancakes.com</span> / <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-amber-200">admin123</span></p>
+          <p>👤 Customer: <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-amber-200">rahul@example.com</span> / <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-amber-200">password123</span></p>
+        </div>
 
         {/* Footer Link */}
         <div className="text-center pt-4 border-t border-amber-100 text-xs text-slate-500">

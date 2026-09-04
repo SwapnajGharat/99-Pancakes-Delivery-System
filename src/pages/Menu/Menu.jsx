@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { FiFilter, FiSliders, FiX, FiCheck } from 'react-icons/fi';
+import { FiX, FiCheck, FiRefreshCw, FiAlertTriangle } from 'react-icons/fi';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { products } from '../../data/products';
-import { categories } from '../../data/categories';
+import Loader from '../../components/Loader/Loader';
+import { productAPI, categoryAPI } from '../../services/apiServices';
+import { products as fallbackProducts } from '../../data/products';
+import { categories as fallbackCategories } from '../../data/categories';
 
 const Menu = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,13 +16,78 @@ const Menu = () => {
 
   const [selectedCategory, setSelectedCategory] = useState(categoryParam);
   const [searchQuery, setSearchQuery] = useState(searchQueryParam);
-  const [sortBy, setSortBy] = useState('popular'); // 'popular', 'rating', 'price-low', 'price-high'
+  const [sortBy, setSortBy] = useState('popular');
   const [vegOnly, setVegOnly] = useState(false);
+
+  const [productsList, setProductsList] = useState([]);
+  const [categoriesList, setCategoriesList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (categoryParam) setSelectedCategory(categoryParam);
     if (searchQueryParam !== null) setSearchQuery(searchQueryParam);
   }, [categoryParam, searchQueryParam]);
+
+  // Fetch Categories & Products from API
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      // Fetch categories
+      let cats = [];
+      try {
+        cats = await categoryAPI.getCategories();
+      } catch (catErr) {
+        console.warn('API Category fetch failed, using fallback categories:', catErr.message);
+        cats = fallbackCategories;
+      }
+      setCategoriesList(cats && cats.length > 0 ? cats : fallbackCategories);
+
+      // Fetch products with backend params
+      const apiParams = {};
+      if (selectedCategory !== 'all') {
+        apiParams.category = selectedCategory;
+      }
+      if (searchQuery.trim()) {
+        apiParams.search = searchQuery.trim();
+      }
+      if (vegOnly) {
+        apiParams.isVeg = true;
+      }
+      if (sortBy === 'price-low') apiParams.sort = 'price-low';
+      else if (sortBy === 'price-high') apiParams.sort = 'price-high';
+      else if (sortBy === 'rating') apiParams.sort = 'rating';
+
+      let prodsRes;
+      try {
+        prodsRes = await productAPI.getProducts(apiParams);
+        const dataArr = prodsRes?.data || prodsRes;
+        if (Array.isArray(dataArr) && dataArr.length > 0) {
+          setProductsList(dataArr);
+        } else if (Array.isArray(dataArr) && dataArr.length === 0 && selectedCategory === 'all' && !searchQuery) {
+          // If database returns 0 items for 'all', fallback to mock catalog
+          setProductsList(fallbackProducts);
+        } else {
+          setProductsList(Array.isArray(dataArr) ? dataArr : fallbackProducts);
+        }
+      } catch (prodErr) {
+        console.warn('API Product fetch failed, using fallback products:', prodErr.message);
+        setProductsList(fallbackProducts);
+      }
+    } catch (err) {
+      console.error('[Menu] Fetch error:', err);
+      setError('Unable to load menu from server. Showing local menu catalog.');
+      setProductsList(fallbackProducts);
+      setCategoriesList(fallbackCategories);
+    } finally {
+      setLoading(false);
+    }
+  }, [selectedCategory, searchQuery, vegOnly, sortBy]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   // Handle category tab change
   const handleCategoryChange = (slug) => {
@@ -34,34 +101,61 @@ const Menu = () => {
     setSearchParams(newParams);
   };
 
-  // Filtering & Sorting Logic
-  const filteredProducts = products.filter((p) => {
+  // Robust client-side filtering check
+  const filteredProducts = productsList.filter((p) => {
     // Category match
-    if (selectedCategory !== 'all' && p.categorySlug !== selectedCategory) {
+    if (selectedCategory !== 'all') {
+      const selectedSlug = selectedCategory.toLowerCase().trim();
+      
+      const prodCategorySlug = (
+        (typeof p.category === 'object' && p.category?.slug) ||
+        p.categorySlug ||
+        (typeof p.category === 'string' ? p.category : '')
+      ).toLowerCase().trim();
+
+      const catNameSlug = (
+        typeof p.category === 'object'
+          ? p.category?.name
+          : (typeof p.category === 'string' ? p.category : '')
+      ).toLowerCase().trim().replace(/\s+/g, '-');
+
+      const isCatMatch =
+        prodCategorySlug === selectedSlug ||
+        p.categorySlug?.toLowerCase().trim() === selectedSlug ||
+        catNameSlug === selectedSlug ||
+        catNameSlug.includes(selectedSlug) ||
+        selectedSlug.includes(catNameSlug);
+
+      if (!isCatMatch) {
+        return false;
+      }
+    }
+
+    // Filter parameter match (e.g. bestsellers)
+    if (filterParam === 'bestsellers' && !p.isBestseller && !p.featured) {
       return false;
     }
-    // Filter parameter match
-    if (filterParam === 'bestsellers' && !p.isBestseller) {
-      return false;
-    }
+
     // Search query match
     if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      const matchName = p.name.toLowerCase().includes(q);
-      const matchCat = p.category.toLowerCase().includes(q);
-      const matchTag = p.tags.some(tag => tag.toLowerCase().includes(q));
+      const q = searchQuery.toLowerCase().trim();
+      const matchName = p.name?.toLowerCase().includes(q);
+      const matchCat = (typeof p.category === 'object' ? p.category?.name : p.category)?.toLowerCase().includes(q);
+      const matchTag = p.tags?.some(tag => tag.toLowerCase().includes(q));
       if (!matchName && !matchCat && !matchTag) return false;
     }
+
     // Veg filter match
     if (vegOnly && !p.isVeg) {
       return false;
     }
+
     return true;
   }).sort((a, b) => {
     if (sortBy === 'price-low') return a.price - b.price;
     if (sortBy === 'price-high') return b.price - a.price;
-    if (sortBy === 'rating') return b.rating - a.rating;
-    return b.reviewsCount - a.reviewsCount; // popular
+    if (sortBy === 'rating') return (b.rating || 0) - (a.rating || 0);
+    return (b.reviewsCount || b.reviewCount || 0) - (a.reviewsCount || a.reviewCount || 0);
   });
 
   const clearFilters = () => {
@@ -150,12 +244,12 @@ const Menu = () => {
                 : 'bg-amber-50 hover:bg-amber-100 text-[#5C3D2E]'
             }`}
           >
-            All Desserts ({products.length})
+            All Desserts
           </button>
 
-          {categories.map((cat) => (
+          {categoriesList.map((cat) => (
             <button
-              key={cat.id}
+              key={cat._id || cat.id || cat.slug}
               onClick={() => handleCategoryChange(cat.slug)}
               className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
                 selectedCategory === cat.slug
@@ -163,36 +257,56 @@ const Menu = () => {
                   : 'bg-amber-50 hover:bg-amber-100 text-[#5C3D2E]'
               }`}
             >
-              {cat.name}
+              {cat.name} ({cat.count !== undefined ? cat.count : ''})
             </button>
           ))}
         </div>
 
       </div>
 
+      {/* Error Alert Banner */}
+      {error && (
+        <div className="mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-800 text-xs flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <FiAlertTriangle className="text-amber-600 text-lg shrink-0" />
+            <span>{error}</span>
+          </div>
+          <button
+            onClick={fetchData}
+            className="flex items-center gap-1 px-3 py-1 bg-white border border-amber-300 rounded-full font-bold hover:bg-amber-100 transition-colors cursor-pointer"
+          >
+            <FiRefreshCw /> Retry
+          </button>
+        </div>
+      )}
+
       {/* Filter Status & Count */}
       <div className="flex items-center justify-between mb-6">
         <p className="text-xs sm:text-sm font-semibold text-[#5C3D2E]">
           Showing <span className="font-extrabold text-[#FF4D6D]">{filteredProducts.length}</span> desserts
-          {selectedCategory !== 'all' && ` in ${categories.find(c => c.slug === selectedCategory)?.name}`}
+          {selectedCategory !== 'all' && ` in ${categoriesList.find(c => c.slug === selectedCategory)?.name || selectedCategory}`}
           {searchQuery && ` matching "${searchQuery}"`}
         </p>
 
         {(selectedCategory !== 'all' || searchQuery || vegOnly) && (
           <button
             onClick={clearFilters}
-            className="flex items-center gap-1 text-xs font-bold text-[#FF4D6D] hover:underline"
+            className="flex items-center gap-1 text-xs font-bold text-[#FF4D6D] hover:underline cursor-pointer"
           >
             <FiX /> Reset All Filters
           </button>
         )}
       </div>
 
-      {/* Product Grid */}
-      {filteredProducts.length > 0 ? (
+      {/* Product Grid / Loader / Empty State */}
+      {loading ? (
+        <div className="py-16 text-center">
+          <Loader text="Loading fresh dessert menu..." />
+        </div>
+      ) : filteredProducts.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product._id || product.id} product={product} />
           ))}
         </div>
       ) : (
@@ -207,7 +321,7 @@ const Menu = () => {
           </p>
           <button
             onClick={clearFilters}
-            className="px-6 py-2.5 rounded-full bg-[#FF4D6D] text-white text-xs font-bold shadow-md hover:bg-[#E63956] transition-colors"
+            className="px-6 py-2.5 rounded-full bg-[#FF4D6D] text-white text-xs font-bold shadow-md hover:bg-[#E63956] transition-colors cursor-pointer"
           >
             Clear Filters
           </button>

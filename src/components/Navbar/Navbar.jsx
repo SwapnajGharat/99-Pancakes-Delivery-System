@@ -10,13 +10,18 @@ import {
   FiX,
   FiMapPin,
   FiPhone,
-  FiChevronRight
+  FiChevronRight,
+  FiLogOut,
+  FiGrid
 } from 'react-icons/fi';
 import { useCart } from '../../hooks/useCart';
+import { useAuth } from '../../context/AuthContext';
 import SearchBar from '../SearchBar/SearchBar';
 
 const Navbar = () => {
   const { cartCount, wishlist } = useCart();
+  const { user, isAuthenticated, isAdmin, logout } = useAuth();
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
@@ -139,14 +144,29 @@ const Navbar = () => {
                   )}
                 </NavLink>
               ))}
+
+              {isAdmin && (
+                <NavLink
+                  to="/admin"
+                  className={({ isActive }) =>
+                    `text-xs font-black transition-all px-3 py-1.5 rounded-full relative z-10 flex items-center gap-1 ${
+                      isActive
+                        ? 'bg-[#5C3D2E] text-[#FFB703]'
+                        : 'text-[#5C3D2E] hover:text-[#FF4D6D]'
+                    }`
+                  }
+                >
+                  <FiGrid className="text-xs" /> Admin
+                </NavLink>
+              )}
             </nav>
 
             {/* Search Input Bar (Desktop) */}
-            <div className="hidden md:block w-56 lg:w-64">
+            <div className="hidden md:block w-48 lg:w-56">
               <SearchBar placeholder="Search menu..." />
             </div>
 
-            {/* Action Buttons: Search, Wishlist, Cart, Login */}
+            {/* Action Buttons: Search, Wishlist, Cart, User Auth */}
             <div className="flex items-center gap-2 sm:gap-3">
               
               {/* Search Icon Mobile */}
@@ -189,21 +209,37 @@ const Navbar = () => {
                 )}
               </Link>
 
-              {/* Login Button */}
-              <Link
-                to="/login"
-                className="hidden sm:flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#5C3D2E] text-white text-xs font-bold hover:bg-[#4A3024] transition-colors shadow-md"
-              >
-                <FiUser className="text-sm" />
-                <span>Login</span>
-              </Link>
+              {/* User Profile / Auth State */}
+              {isAuthenticated ? (
+                <div className="flex items-center gap-2">
+                  <Link
+                    to="/profile"
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 border border-white hover:bg-white text-[#5C3D2E] text-xs font-bold shadow-xs transition-colors"
+                    title="Account Profile"
+                  >
+                    <div className="w-6 h-6 rounded-full bg-[#FF4D6D] text-white flex items-center justify-center text-xs font-extrabold">
+                      {user?.name ? user.name[0].toUpperCase() : 'U'}
+                    </div>
+                    <span className="hidden xl:inline truncate max-w-[90px]">{user?.name?.split(' ')[0]}</span>
+                  </Link>
 
-              <Link
-                to="/profile"
-                className="sm:hidden p-2 text-[#5C3D2E] hover:text-[#FF4D6D] rounded-full hover:bg-white/60"
-              >
-                <FiUser className="text-xl" />
-              </Link>
+                  <button
+                    onClick={logout}
+                    className="p-2 text-[#5C3D2E] hover:text-red-600 rounded-full hover:bg-white/60 transition-colors"
+                    title="Log Out"
+                  >
+                    <FiLogOut className="text-lg" />
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  to="/login"
+                  className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#5C3D2E] text-white text-xs font-bold hover:bg-[#4A3024] transition-colors shadow-md cursor-pointer"
+                >
+                  <FiUser className="text-sm" />
+                  <span>Login</span>
+                </Link>
+              )}
             </div>
 
           </div>
@@ -275,30 +311,53 @@ const Navbar = () => {
                     </NavLink>
                   ))}
 
-                  <NavLink
-                    to="/orders"
-                    className="flex items-center justify-between py-3 px-4 rounded-xl text-sm font-bold text-white/80 hover:bg-white/10 transition-colors"
-                  >
-                    <span>My Orders</span>
-                    <FiChevronRight className="text-base opacity-70" />
-                  </NavLink>
-                  <NavLink
-                    to="/profile"
-                    className="flex items-center justify-between py-3 px-4 rounded-xl text-sm font-bold text-white/80 hover:bg-white/10 transition-colors"
-                  >
-                    <span>My Profile</span>
-                    <FiChevronRight className="text-base opacity-70" />
-                  </NavLink>
+                  {isAuthenticated && (
+                    <>
+                      <NavLink
+                        to="/orders"
+                        className="flex items-center justify-between py-3 px-4 rounded-xl text-sm font-bold text-white/80 hover:bg-white/10 transition-colors"
+                      >
+                        <span>My Orders</span>
+                        <FiChevronRight className="text-base opacity-70" />
+                      </NavLink>
+                      <NavLink
+                        to="/profile"
+                        className="flex items-center justify-between py-3 px-4 rounded-xl text-sm font-bold text-white/80 hover:bg-white/10 transition-colors"
+                      >
+                        <span>My Profile</span>
+                        <FiChevronRight className="text-base opacity-70" />
+                      </NavLink>
+                    </>
+                  )}
+
+                  {isAdmin && (
+                    <NavLink
+                      to="/admin"
+                      className="flex items-center justify-between py-3 px-4 rounded-xl text-sm font-black bg-[#FFB703] text-[#2D2D2D] transition-colors"
+                    >
+                      <span>👑 Admin Dashboard</span>
+                      <FiChevronRight className="text-base opacity-70" />
+                    </NavLink>
+                  )}
                 </div>
               </div>
 
               <div className="pt-6 border-t border-white/10 space-y-3">
-                <Link
-                  to="/login"
-                  className="w-full py-3 rounded-full bg-[#FF4D6D] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md"
-                >
-                  <FiUser /> Login / Sign Up
-                </Link>
+                {isAuthenticated ? (
+                  <button
+                    onClick={logout}
+                    className="w-full py-3 rounded-full bg-red-600/80 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md cursor-pointer"
+                  >
+                    <FiLogOut /> Log Out ({user?.name})
+                  </button>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="w-full py-3 rounded-full bg-[#FF4D6D] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md"
+                  >
+                    <FiUser /> Login / Sign Up
+                  </Link>
+                )}
                 <div className="text-center text-xs text-white/60">
                   <p>📍 Sector 15, New Panvel East</p>
                   <p className="mt-0.5">📞 +91 98200 99999</p>

@@ -21,7 +21,9 @@ export const getCategories = async (req, res, next) => {
     // Attach product counts dynamically
     const categoriesWithCount = await Promise.all(
       categories.map(async (cat) => {
-        const count = await Product.countDocuments({ categorySlug: cat.slug });
+        const count = await Product.countDocuments({
+          $or: [{ category: cat._id }, { categorySlug: cat.slug }],
+        });
         return {
           ...cat.toObject(),
           count,

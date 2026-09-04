@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiUser, FiMail, FiPhone, FiLock, FiEye, FiEyeOff, FiArrowRight } from 'react-icons/fi';
 import toast from 'react-hot-toast';
+import { useAuth } from '../../context/AuthContext';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -12,20 +13,45 @@ const Register = () => {
     confirmPassword: ''
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
+  const { register } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.password) {
+      toast.error('Please fill in all required fields!');
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       toast.error('Passwords do not match!');
       return;
     }
-    toast.success('Account created successfully! Welcome to 99 Pancakes Panvel.', { icon: '🎉' });
-    navigate('/');
+
+    if (formData.password.length < 6) {
+      toast.error('Password must be at least 6 characters long');
+      return;
+    }
+
+    setSubmitting(true);
+    const result = await register({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      password: formData.password,
+    });
+    setSubmitting(false);
+
+    if (result.success) {
+      navigate('/');
+    }
   };
 
   return (
@@ -132,10 +158,11 @@ const Register = () => {
 
           <button
             type="submit"
-            className="w-full py-3.5 rounded-full bg-[#FF4D6D] hover:bg-[#E63956] text-white font-bold text-xs shadow-md shadow-[#FF4D6D]/30 transition-colors flex items-center justify-center gap-2 cursor-pointer mt-2"
+            disabled={submitting}
+            className="w-full py-3.5 rounded-full bg-[#FF4D6D] hover:bg-[#E63956] text-white font-bold text-xs shadow-md shadow-[#FF4D6D]/30 transition-colors flex items-center justify-center gap-2 cursor-pointer mt-2 disabled:opacity-50"
           >
-            <span>REGISTER ACCOUNT</span>
-            <FiArrowRight />
+            <span>{submitting ? 'CREATING ACCOUNT...' : 'REGISTER ACCOUNT'}</span>
+            {!submitting && <FiArrowRight />}
           </button>
         </form>
 
