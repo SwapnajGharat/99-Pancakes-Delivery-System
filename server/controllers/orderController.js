@@ -7,7 +7,7 @@ import { successResponse, errorResponse, paginatedResponse } from '../utils/apiR
 // @access  Private
 export const createOrder = async (req, res, next) => {
   try {
-    const { items, shippingAddress, paymentMethod, discount = 0 } = req.body;
+    const { items, shippingAddress, paymentMethod, fulfillmentType, couponCode } = req.body;
 
     if (!items || items.length === 0) {
       return errorResponse(res, 400, 'Cannot place an order with no items');
@@ -15,6 +15,10 @@ export const createOrder = async (req, res, next) => {
 
     if (!shippingAddress || !shippingAddress.fullName || !shippingAddress.phone || !shippingAddress.addressLine) {
       return errorResponse(res, 400, 'Complete shipping address is required');
+    }
+
+    if (paymentMethod && paymentMethod !== 'COD') {
+      return errorResponse(res, 400, 'Only Cash on Delivery is currently available');
     }
 
     // Validate products & recalculate prices server-side to prevent fraud
@@ -49,9 +53,14 @@ export const createOrder = async (req, res, next) => {
       });
     }
 
-    // Delivery fee logic: free if subtotal >= 499, else 40
-    const deliveryFee = subtotal >= 499 ? 0 : 40;
-    const numDiscount = Math.max(0, Number(discount) || 0);
+    const isPickup = fulfillmentType === 'pickup' || shippingAddress.type === 'Pickup';
+    const deliveryFee = isPickup || subtotal >= 499 ? 0 : 40;
+    let numDiscount = 0;
+    if (couponCode === 'PANVEL15') {
+      numDiscount = Math.round(subtotal * 0.15);
+    } else if (couponCode === 'FREEDEL') {
+      numDiscount = deliveryFee;
+    }
     const taxes = Math.round(subtotal * 0.05); // 5% GST
     const total = Math.max(0, subtotal + deliveryFee + taxes - numDiscount);
 
@@ -72,7 +81,7 @@ export const createOrder = async (req, res, next) => {
       deliveryFee,
       discount: numDiscount,
       total,
-      paymentMethod: paymentMethod === 'ONLINE' ? 'ONLINE' : 'COD',
+      paymentMethod: 'COD',
       paymentStatus: 'PENDING',
       orderStatus: 'PENDING',
     });
@@ -117,7 +126,7 @@ export const getOrderById = async (req, res, next) => {
     }
 
     // Access control: order owner or admin
-    if (order.user._id.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
+    if (req.user.role !== 'admin' && (!order.user || order.user._id.toString() !== req.user._id.toString())) {
       return errorResponse(res, 403, 'Forbidden: You do not have access to view this order');
     }
 

@@ -1,37 +1,38 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { authAPI, userAPI } from '../services/apiServices';
+import { clearStoredAuth, getStoredToken } from '../services/api';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     try {
-      const savedUser = localStorage.getItem('user');
+      const savedUser = localStorage.getItem('user') || sessionStorage.getItem('user');
       return savedUser ? JSON.parse(savedUser) : null;
     } catch {
       return null;
     }
   });
 
-  const [token, setToken] = useState(() => localStorage.getItem('token') || null);
+  const [token, setToken] = useState(() => getStoredToken() || null);
   const [loading, setLoading] = useState(true);
 
   // Restore & verify session on app mount
   useEffect(() => {
     const verifyUser = async () => {
-      const savedToken = localStorage.getItem('token');
+      const savedToken = getStoredToken();
       if (savedToken) {
         try {
           const meData = await authAPI.getMe();
           if (meData?.user) {
             setUser(meData.user);
-            localStorage.setItem('user', JSON.stringify(meData.user));
+            const userStorage = localStorage.getItem('token') ? localStorage : sessionStorage;
+            userStorage.setItem('user', JSON.stringify(meData.user));
           }
         } catch (error) {
           console.error('[AuthContext] Session restore failed:', error?.response?.data?.message || error.message);
-          localStorage.removeItem('token');
-          localStorage.removeItem('user');
+          clearStoredAuth();
           setToken(null);
           setUser(null);
         }
@@ -52,7 +53,7 @@ export const AuthProvider = ({ children }) => {
     return () => window.removeEventListener('auth:unauthorized', handleUnauthorized);
   }, []);
 
-  const login = async (email, password) => {
+  const login = async (email, password, rememberMe = true) => {
     try {
       const data = await authAPI.login({ email, password });
       const authToken = data.token;
@@ -60,8 +61,10 @@ export const AuthProvider = ({ children }) => {
 
       setToken(authToken);
       setUser(authUser);
-      localStorage.setItem('token', authToken);
-      localStorage.setItem('user', JSON.stringify(authUser));
+      clearStoredAuth();
+      const userStorage = rememberMe ? localStorage : sessionStorage;
+      userStorage.setItem('token', authToken);
+      userStorage.setItem('user', JSON.stringify(authUser));
 
       toast.success(`Welcome back, ${authUser.name}!`, { icon: '👋' });
       return { success: true, user: authUser };
@@ -100,8 +103,7 @@ export const AuthProvider = ({ children }) => {
     } finally {
       setToken(null);
       setUser(null);
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      clearStoredAuth();
       toast.success('Logged out successfully');
     }
   };

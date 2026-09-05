@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   FiMapPin,
@@ -22,6 +22,8 @@ const Checkout = () => {
   const { cartItems, cartSubtotal, deliveryFee, taxes, grandTotal, clearCart } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const couponCode = location.state?.couponCode || null;
 
   const [fulfillmentType, setFulfillmentType] = useState('delivery'); // 'delivery', 'pickup'
   const [savedAddresses, setSavedAddresses] = useState([]);
@@ -156,7 +158,8 @@ const Checkout = () => {
         items: orderItems,
         shippingAddress,
         paymentMethod,
-        discount: 0,
+        fulfillmentType,
+        couponCode,
       });
 
       clearCart();
@@ -182,7 +185,10 @@ const Checkout = () => {
   }
 
   const effectiveDeliveryFee = fulfillmentType === 'pickup' ? 0 : deliveryFee;
-  const finalPayable = cartSubtotal + effectiveDeliveryFee + taxes;
+  const couponDiscount = couponCode === 'PANVEL15'
+    ? Math.round(cartSubtotal * 0.15)
+    : couponCode === 'FREEDEL' ? effectiveDeliveryFee : 0;
+  const finalPayable = Math.max(0, cartSubtotal + effectiveDeliveryFee + taxes - couponDiscount);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
@@ -387,18 +393,13 @@ const Checkout = () => {
                 <span className="text-[10px] text-slate-400">Pay cash or UPI upon delivery</span>
               </div>
 
-              {/* Online Payment Placeholder */}
+              {/* Online payments remain unavailable until a provider is configured. */}
               <div
-                onClick={() => setPaymentMethod('ONLINE')}
-                className={`p-4 rounded-2xl border-2 cursor-pointer transition-all flex flex-col items-center justify-center text-center gap-2 ${
-                  paymentMethod === 'ONLINE'
-                    ? 'border-[#FF4D6D] bg-[#FF4D6D]/5 text-[#FF4D6D]'
-                    : 'border-amber-100 bg-white text-slate-600 hover:border-amber-200'
-                }`}
+                className="p-4 rounded-2xl border-2 border-amber-100 bg-slate-50 text-slate-400 flex flex-col items-center justify-center text-center gap-2"
               >
                 <FiSmartphone className="text-2xl" />
-                <span className="text-xs font-bold">Online Payment (UPI / Card)</span>
-                <span className="text-[10px] text-slate-400">Instant digital payment</span>
+                <span className="text-xs font-bold">Online Payment</span>
+                <span className="text-[10px] text-slate-400">Coming soon</span>
               </div>
 
             </div>
@@ -443,6 +444,12 @@ const Checkout = () => {
                 <span>GST & Taxes (5%)</span>
                 <span>{formatPrice(taxes)}</span>
               </div>
+              {couponDiscount > 0 && (
+                <div className="flex justify-between text-green-600">
+                  <span>Coupon Discount ({couponCode})</span>
+                  <span>-{formatPrice(couponDiscount)}</span>
+                </div>
+              )}
             </div>
 
             <div className="pt-4 border-t border-amber-100 flex items-baseline justify-between">

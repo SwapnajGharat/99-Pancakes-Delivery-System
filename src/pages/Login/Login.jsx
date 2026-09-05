@@ -25,7 +25,7 @@ const Login = () => {
     }
 
     setSubmitting(true);
-    const result = await login(email, password);
+    const result = await login(email, password, rememberMe);
     setSubmitting(false);
 
     if (result.success) {
@@ -113,8 +113,8 @@ const Login = () => {
         {/* Demo Admin & User Credentials Helper */}
         <div className="p-3 bg-amber-50/70 border border-amber-200/60 rounded-2xl text-[11px] text-amber-900 space-y-1">
           <p className="font-bold text-[#5C3D2E]">Quick Demo Logins:</p>
-          <p>👑 Admin: <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-amber-200">admin@99pancakes.com</span> / <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-amber-200">admin123</span></p>
-          <p>👤 Customer: <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-amber-200">rahul@example.com</span> / <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-amber-200">password123</span></p>
+          <p>👑 Admin: <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-amber-200">admin@99pancakes.com</span> / <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-amber-200">Admin@123456</span></p>
+          <p>👤 Customer: <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-amber-200">customer@99pancakes.com</span> / <span className="font-mono bg-white px-1.5 py-0.5 rounded border border-amber-200">Customer@123456</span></p>
         </div>
 
         {/* Footer Link */}

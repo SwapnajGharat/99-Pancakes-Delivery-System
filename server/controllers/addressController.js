@@ -77,10 +77,27 @@ export const updateAddress = async (req, res, next) => {
       await Address.updateMany({ user: req.user._id }, { isDefault: false });
     }
 
-    address = await Address.findByIdAndUpdate(req.params.id, req.body, {
+    const allowedFields = ['fullName', 'phone', 'addressLine', 'landmark', 'city', 'state', 'pincode', 'type', 'isDefault'];
+    const updates = Object.fromEntries(
+      allowedFields
+        .filter((field) => req.body[field] !== undefined)
+        .map((field) => [field, req.body[field]])
+    );
+
+    address = await Address.findByIdAndUpdate(req.params.id, updates, {
       new: true,
       runValidators: true,
     });
+
+    const hasDefault = await Address.exists({ user: req.user._id, isDefault: true });
+    if (!hasDefault) {
+      await Address.findOneAndUpdate(
+        { user: req.user._id },
+        { isDefault: true },
+        { sort: { createdAt: 1 } }
+      );
+      address = await Address.findById(req.params.id);
+    }
 
     return successResponse(res, 200, 'Address updated successfully', address);
   } catch (error) {
@@ -99,6 +116,15 @@ export const deleteAddress = async (req, res, next) => {
     }
 
     await Address.findByIdAndDelete(req.params.id);
+
+    const hasDefault = await Address.exists({ user: req.user._id, isDefault: true });
+    if (!hasDefault) {
+      await Address.findOneAndUpdate(
+        { user: req.user._id },
+        { isDefault: true },
+        { sort: { createdAt: 1 } }
+      );
+    }
 
     return successResponse(res, 200, 'Address deleted successfully');
   } catch (error) {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FiUser, FiMapPin, FiPackage, FiEdit3, FiPhone, FiMail, FiCheck, FiTrash2, FiPlus } from 'react-icons/fi';
+import { FiUser, FiMapPin, FiPackage, FiEdit3, FiPhone, FiMail, FiCheck, FiTrash2, FiPlus, FiAlertCircle } from 'react-icons/fi';
 import { useAuth } from '../../context/AuthContext';
 import { addressAPI, orderAPI } from '../../services/apiServices';
 import Loader from '../../components/Loader/Loader';
@@ -18,6 +18,7 @@ const Profile = () => {
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [recentOrders, setRecentOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
 
   // Address modal/form state
   const [showAddressForm, setShowAddressForm] = useState(false);
@@ -45,15 +46,17 @@ const Profile = () => {
 
   const loadData = async () => {
     setLoading(true);
+    setLoadError('');
     try {
       const [addrs, ords] = await Promise.all([
-        addressAPI.getAddresses().catch(() => []),
-        orderAPI.getMyOrders().catch(() => []),
+        addressAPI.getAddresses(),
+        orderAPI.getMyOrders(),
       ]);
       setSavedAddresses(Array.isArray(addrs) ? addrs : []);
       setRecentOrders(Array.isArray(ords) ? ords : []);
     } catch (err) {
       console.error('[Profile] Fetch error:', err);
+      setLoadError(err.response?.data?.message || 'Unable to load your account data. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -141,6 +144,23 @@ const Profile = () => {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
         <Loader text="Loading account profile..." />
+      </div>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <div className="max-w-md mx-auto px-4 py-20 text-center space-y-4">
+        <FiAlertCircle className="text-4xl text-amber-500 mx-auto" />
+        <h2 className="text-xl font-bold text-[#5C3D2E]">Unable to load profile</h2>
+        <p className="text-xs text-slate-500">{loadError}</p>
+        <button
+          type="button"
+          onClick={loadData}
+          className="px-6 py-2.5 rounded-full bg-[#FF4D6D] text-white font-bold text-xs shadow-md"
+        >
+          Try Again
+        </button>
       </div>
     );
   }

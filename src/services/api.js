@@ -1,5 +1,16 @@
 import axios from 'axios';
 
+export const getStoredToken = () => (
+  localStorage.getItem('token') || sessionStorage.getItem('token')
+);
+
+export const clearStoredAuth = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  sessionStorage.removeItem('token');
+  sessionStorage.removeItem('user');
+};
+
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
   headers: {
@@ -11,7 +22,7 @@ const api = axios.create({
 // Auto attach JWT token from localStorage if present
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = getStoredToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -26,10 +37,9 @@ api.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 401) {
       // Clean up token on 401 Unauthorized / Token Expired
-      const currentToken = localStorage.getItem('token');
+      const currentToken = getStoredToken();
       if (currentToken) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        clearStoredAuth();
         window.dispatchEvent(new Event('auth:unauthorized'));
       }
     }

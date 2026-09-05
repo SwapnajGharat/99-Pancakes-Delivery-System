@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FiPackage, FiMapPin, FiCalendar, FiCreditCard, FiChevronRight } from 'react-icons/fi';
+import { FiPackage, FiMapPin, FiCalendar, FiCreditCard, FiChevronRight, FiAlertCircle } from 'react-icons/fi';
 import { orderAPI } from '../../services/apiServices';
 import { useCart } from '../../hooks/useCart';
 import { formatPrice } from '../../utils/formatters';
@@ -28,17 +28,19 @@ const getStatusBadgeClass = (status) => {
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
   const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchOrders = async () => {
       setLoading(true);
+      setLoadError('');
       try {
         const data = await orderAPI.getMyOrders();
         setOrders(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error('[Orders] Fetch error:', err);
-        toast.error('Failed to load orders');
+        setLoadError(err.response?.data?.message || 'Unable to load your orders. Please try again.');
       } finally {
         setLoading(false);
       }
@@ -61,6 +63,23 @@ const Orders = () => {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
         <Loader text="Loading your order history..." />
+      </div>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <div className="max-w-md mx-auto px-4 py-20 text-center space-y-4">
+        <FiAlertCircle className="text-4xl text-amber-500 mx-auto" />
+        <h2 className="text-xl font-bold text-[#5C3D2E]">Unable to load orders</h2>
+        <p className="text-xs text-slate-500">{loadError}</p>
+        <button
+          type="button"
+          onClick={() => window.location.reload()}
+          className="px-6 py-2.5 rounded-full bg-[#FF4D6D] text-white font-bold text-xs shadow-md"
+        >
+          Try Again
+        </button>
       </div>
     );
   }

@@ -275,7 +275,9 @@ const Cart = () => {
 
             {/* Checkout Button */}
             <button
-              onClick={() => navigate('/checkout')}
+              onClick={() => navigate('/checkout', {
+                state: { couponCode: appliedCoupon?.code || null },
+              })}
               className="w-full py-4 rounded-full bg-[#FF4D6D] hover:bg-[#E63956] text-white text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#FF4D6D]/30 transition-all cursor-pointer mt-4"
             >
               <span>PROCEED TO CHECKOUT</span>
