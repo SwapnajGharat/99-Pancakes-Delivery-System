@@ -3,6 +3,8 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 import { env } from './config/env.js';
 
@@ -79,16 +81,21 @@ app.use(notFound);
 // Centralized Error Middleware
 app.use(errorHandler);
 
-// Start server; JSON files are opened lazily by the storage utility.
-const PORT = env.PORT || 5000;
+// Start a local listener only when this module is run directly. Vercel imports
+// the Express app from api/index.js as a serverless function.
+const isMainModule = process.argv[1]
+  && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
 
-app.listen(PORT, () => {
-  console.log(`==================================================`);
-  console.log(`🥞 99 Pancakes Panvel API Server Running`);
-  console.log(`📍 Environment : ${env.NODE_ENV}`);
-  console.log(`🌐 Port        : ${PORT}`);
-  console.log(`🔗 Health Check: http://localhost:${PORT}/api/health`);
-  console.log(`==================================================`);
-});
+if (isMainModule) {
+  const PORT = env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`==================================================`);
+    console.log(`🥞 99 Pancakes Panvel API Server Running`);
+    console.log(`📍 Environment : ${env.NODE_ENV}`);
+    console.log(`🌐 Port        : ${PORT}`);
+    console.log(`🔗 Health Check: http://localhost:${PORT}/api/health`);
+    console.log(`==================================================`);
+  });
+}
 
 export default app;

@@ -5,13 +5,17 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const dataDirectory = path.resolve(__dirname, '../data');
+const runtimeDataDirectory = process.env.VERCEL
+  ? path.resolve('/tmp/99pancakes-data')
+  : dataDirectory;
 const collectionLocks = new Map();
 
 const ensureDataDirectory = async () => {
-  await fs.mkdir(dataDirectory, { recursive: true });
+  await fs.mkdir(runtimeDataDirectory, { recursive: true });
 };
 
-const filePathFor = (collection) => path.join(dataDirectory, `${collection}.json`);
+const filePathFor = (collection) => path.join(runtimeDataDirectory, `${collection}.json`);
+const sourceFilePathFor = (collection) => path.join(dataDirectory, `${collection}.json`);
 
 export const createId = () => crypto.randomBytes(12).toString('hex');
 
@@ -23,8 +27,16 @@ export const readCollection = async (collection) => {
     return Array.isArray(records) ? records : [];
   } catch (error) {
     if (error.code !== 'ENOENT') throw error;
-    await writeCollection(collection, []);
-    return [];
+    let initialRecords = [];
+    if (runtimeDataDirectory !== dataDirectory) {
+      try {
+        initialRecords = JSON.parse(await fs.readFile(sourceFilePathFor(collection), 'utf8'));
+      } catch (sourceError) {
+        if (sourceError.code !== 'ENOENT') throw sourceError;
+      }
+    }
+    await writeCollection(collection, initialRecords);
+    return initialRecords;
   }
 };
 
@@ -47,4 +59,4 @@ export const withCollectionLock = async (collection, operation) => {
   }
 };
 
-export const dataPath = dataDirectory;
+export const dataPath = runtimeDataDirectory;
