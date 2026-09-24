@@ -128,7 +128,7 @@ npm run seed
 ### Seed Credentials
 | Role | Email | Password |
 |---|---|---|
-| **Admin** | `admin@99pancakes.com` | `Admin@123456` |
+| **Admin** | `swapnaj@gmail.com` | `1234567890` |
 | **Customer** | `customer@99pancakes.com` | `Customer@123456` |
 
 ---

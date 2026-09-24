@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "server": "node server/server.js",
     "server:dev": "nodemon server/server.js",
-    "seed": "node server/seed/seedData.js"
+    "seed": "node server/seed/seedData.js",
+    "update-admin": "node server/scripts/updateAdmin.js"
   },
   "dependencies": {
     "axios": "^1.7.9",

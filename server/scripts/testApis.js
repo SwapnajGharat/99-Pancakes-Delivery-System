@@ -73,8 +73,8 @@ const runTests = async () => {
 
     // 2. Admin Login
     const adminLogin = await makeRequest('POST', '/api/auth/login', {
-      email: 'admin@99pancakes.com',
-      password: 'Admin@123456',
+      email: 'swapnaj@gmail.com',
+      password: '1234567890',
     });
     assert(
       adminLogin.status === 200 && adminLogin.body.data?.token,

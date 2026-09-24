@@ -365,9 +365,9 @@ const seedDB = async () => {
     console.log('[Seed] Creating default Admin and Customer accounts...');
     const adminUser = await User.create({
       name: '99 Pancakes Admin',
-      email: 'admin@99pancakes.com',
+      email: 'swapnaj@gmail.com',
       phone: '9876543210',
-      password: 'Admin@123456',
+      password: '1234567890',
       role: 'admin',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
     });
@@ -453,7 +453,7 @@ const seedDB = async () => {
     console.log('✅ DATABASE SEEDING COMPLETED SUCCESSFULLY!');
     console.log('--------------------------------------------------');
     console.log('🔑 TEST ACCOUNTS:');
-    console.log('   Admin    : admin@99pancakes.com    / Admin@123456');
+    console.log('   Admin    : swapnaj@gmail.com       / 1234567890');
     console.log('   Customer : customer@99pancakes.com / Customer@123456');
     console.log('==================================================');
 
