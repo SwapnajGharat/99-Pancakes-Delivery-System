@@ -1,0 +1,38 @@
+[
+  {
+    "phone": "9876543210",
+    "role": "admin",
+    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
+    "isActive": true,
+    "name": "99 Pancakes Admin",
+    "email": "swapnaj@gmail.com",
+    "password": "$2a$10$lepLr7VJ3M3eNIxaPwNS7eIZy4sApb49k7lumNWOt5yqZnx8A1gkS",
+    "_id": "a71e57f6e16ad10c39f29895",
+    "createdAt": "2026-09-24T16:29:17.113Z",
+    "updatedAt": "2026-09-24T16:29:17.113Z"
+  },
+  {
+    "phone": "9123456789",
+    "role": "customer",
+    "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80",
+    "isActive": true,
+    "name": "Rohan Sharma",
+    "email": "customer@99pancakes.com",
+    "password": "$2a$10$qTDn6FzS5VD41hQrx3qXzeWcxw4ygBC/bcsh9y6lCJ692I7ONkKv.",
+    "_id": "e2477362eedd1622bf0eb4b4",
+    "createdAt": "2026-09-24T16:29:17.178Z",
+    "updatedAt": "2026-09-24T16:29:17.178Z"
+  },
+  {
+    "phone": "9000000000",
+    "role": "customer",
+    "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80",
+    "isActive": true,
+    "name": "Smoke User",
+    "email": "smoke-1790267521856@example.com",
+    "password": "$2a$10$OaL1mx2N53xZqqZ4wDdwI.tRAKf10spk5jyHt6A1f.gyHdADtCoXO",
+    "_id": "5a4759eb14d53e62e8de1368",
+    "createdAt": "2026-09-24T16:32:01.898Z",
+    "updatedAt": "2026-09-24T16:32:01.898Z"
+  }
+]

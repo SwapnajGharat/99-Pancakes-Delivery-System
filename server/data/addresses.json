@@ -1,0 +1,47 @@
+[
+  {
+    "landmark": "Near Orion Mall",
+    "city": "Panvel",
+    "state": "Maharashtra",
+    "type": "Home",
+    "isDefault": true,
+    "user": "e2477362eedd1622bf0eb4b4",
+    "fullName": "Rohan Sharma",
+    "phone": "9123456789",
+    "addressLine": "Flat 402, Sunshine Heights, Sector 15",
+    "pincode": "410206",
+    "_id": "f9c13998e51831941b19f816",
+    "createdAt": "2026-09-24T16:29:17.267Z",
+    "updatedAt": "2026-09-24T16:29:17.267Z"
+  },
+  {
+    "landmark": "Opposite Railway Station",
+    "city": "Panvel",
+    "state": "Maharashtra",
+    "type": "Work",
+    "isDefault": false,
+    "user": "e2477362eedd1622bf0eb4b4",
+    "fullName": "Rohan Sharma",
+    "phone": "9123456789",
+    "addressLine": "Building B3, Technopark, Sector 20",
+    "pincode": "410206",
+    "_id": "34aa1f9198f2936135964d8b",
+    "createdAt": "2026-09-24T16:29:17.267Z",
+    "updatedAt": "2026-09-24T16:29:17.267Z"
+  },
+  {
+    "landmark": "",
+    "city": "Panvel",
+    "state": "Maharashtra",
+    "type": "Home",
+    "isDefault": true,
+    "user": "5a4759eb14d53e62e8de1368",
+    "fullName": "Smoke User",
+    "phone": "9000000000",
+    "addressLine": "Test street",
+    "pincode": "410206",
+    "_id": "3a96ae72c353ec5beb5fc0af",
+    "createdAt": "2026-09-24T16:32:01.970Z",
+    "updatedAt": "2026-09-24T16:32:01.970Z"
+  }
+]

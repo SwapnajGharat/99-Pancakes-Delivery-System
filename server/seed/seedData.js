@@ -1,5 +1,3 @@
-import mongoose from 'mongoose';
-import { env } from '../config/env.js';
 import { User } from '../models/User.js';
 import { Category } from '../models/Category.js';
 import { Product } from '../models/Product.js';
@@ -349,9 +347,7 @@ const slugify = (text) =>
 
 const seedDB = async () => {
   try {
-    console.log('[Seed] Connecting to MongoDB...');
-    await mongoose.connect(env.MONGO_URI);
-    console.log('[Seed] MongoDB Connected successfully.');
+    console.log('[Seed] Using local JSON storage...');
 
     // Clear existing collection data
     console.log('[Seed] Clearing old database records...');

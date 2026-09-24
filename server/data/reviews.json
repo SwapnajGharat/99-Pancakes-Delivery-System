@@ -1,0 +1,20 @@
+[
+  {
+    "user": "e2477362eedd1622bf0eb4b4",
+    "product": "dd1a3992077efe412b654c19",
+    "rating": 5,
+    "comment": "Absolutely heavenly mini pancakes! Fresh, warm, and drenched in Nutella.",
+    "_id": "da8f375f62eb4a96a3c165e1",
+    "createdAt": "2026-09-24T16:29:17.269Z",
+    "updatedAt": "2026-09-24T16:29:17.269Z"
+  },
+  {
+    "user": "5a4759eb14d53e62e8de1368",
+    "product": "be54f16aac0906dff7871649",
+    "rating": 5,
+    "comment": "Smoke review",
+    "_id": "430dc0cc956a67b4e4841c24",
+    "createdAt": "2026-09-24T16:32:01.977Z",
+    "updatedAt": "2026-09-24T16:32:01.977Z"
+  }
+]

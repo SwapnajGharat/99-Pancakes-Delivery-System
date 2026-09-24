@@ -1,0 +1,92 @@
+[
+  {
+    "description": "Bite-sized, fluffy mini pancakes drizzled with Belgian chocolate and fresh toppings.",
+    "image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=600&q=80",
+    "isActive": true,
+    "name": "Mini Pancakes",
+    "slug": "mini-pancakes",
+    "_id": "9d72be125b669e905bf47942",
+    "createdAt": "2026-09-24T16:29:17.237Z",
+    "updatedAt": "2026-09-24T16:29:17.237Z"
+  },
+  {
+    "description": "Crispy on the outside, soft inside waffle pockets loaded with syrups & cream.",
+    "image": "https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=600&q=80",
+    "isActive": true,
+    "name": "Waffles",
+    "slug": "waffles",
+    "_id": "1fc697e9ba129ad5e28bbe9c",
+    "createdAt": "2026-09-24T16:29:17.238Z",
+    "updatedAt": "2026-09-24T16:29:17.238Z"
+  },
+  {
+    "description": "Handcrafted celebration cakes, chocolate pull-up cakes, and pancake towers.",
+    "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80",
+    "isActive": true,
+    "name": "Cakes",
+    "slug": "cakes",
+    "_id": "243d8f82ec66054e03ad36e4",
+    "createdAt": "2026-09-24T16:29:17.239Z",
+    "updatedAt": "2026-09-24T16:29:17.239Z"
+  },
+  {
+    "description": "Delicate pastry slices featuring chocolate truffle, red velvet, and fruit preserves.",
+    "image": "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&w=600&q=80",
+    "isActive": true,
+    "name": "Pastries",
+    "slug": "pastries",
+    "_id": "f3211cc134bb158d1ab628dd",
+    "createdAt": "2026-09-24T16:29:17.240Z",
+    "updatedAt": "2026-09-24T16:29:17.240Z"
+  },
+  {
+    "description": "Fudgy, melt-in-your-mouth brownies topped with chocolate drizzle and walnuts.",
+    "image": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80",
+    "isActive": true,
+    "name": "Brownies",
+    "slug": "brownies",
+    "_id": "1d0c260a6b21b8a0f004722a",
+    "createdAt": "2026-09-24T16:29:17.241Z",
+    "updatedAt": "2026-09-24T16:29:17.241Z"
+  },
+  {
+    "description": "Thick, creamy gourmet thickshakes topped with whipped cream and crumbles.",
+    "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80",
+    "isActive": true,
+    "name": "Milkshakes",
+    "slug": "milkshakes",
+    "_id": "3a8d079f57c4e6070a93c667",
+    "createdAt": "2026-09-24T16:29:17.242Z",
+    "updatedAt": "2026-09-24T16:29:17.242Z"
+  },
+  {
+    "description": "Rich Belgian hot chocolate, hazelnut coffees, and aromatic warm beverages.",
+    "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=600&q=80",
+    "isActive": true,
+    "name": "Hot Drinks",
+    "slug": "hot-drinks",
+    "_id": "6af709344863983baec66b7e",
+    "createdAt": "2026-09-24T16:29:17.243Z",
+    "updatedAt": "2026-09-24T16:29:17.243Z"
+  },
+  {
+    "description": "Refreshing iced coffees, fruit coolers, and sparkling berry mocktails.",
+    "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80",
+    "isActive": true,
+    "name": "Cold Drinks",
+    "slug": "cold-drinks",
+    "_id": "b55c5ba13dd470c398aeed85",
+    "createdAt": "2026-09-24T16:29:17.244Z",
+    "updatedAt": "2026-09-24T16:29:17.244Z"
+  },
+  {
+    "description": "Curated value meal combos featuring pancakes, waffles, and thickshakes.",
+    "image": "https://images.unsplash.com/photo-1554520735-0a6b8b6ce8b7?auto=format&fit=crop&w=600&q=80",
+    "isActive": true,
+    "name": "Combos",
+    "slug": "combos",
+    "_id": "48fcc98e17cca9c06c11578e",
+    "createdAt": "2026-09-24T16:29:17.245Z",
+    "updatedAt": "2026-09-24T16:29:17.245Z"
+  }
+]

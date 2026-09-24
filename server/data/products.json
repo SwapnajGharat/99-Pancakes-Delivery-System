@@ -1,0 +1,495 @@
+[
+  {
+    "images": [
+      "https://i.pinimg.com/736x/ca/e4/3f/cae43f6251ebf68fd5dd5abbd9870737.jpg"
+    ],
+    "rating": 5,
+    "reviewCount": 1,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": true,
+    "prepTime": "12-15 mins",
+    "calories": "420 kcal",
+    "tags": [
+      "Nutella",
+      "Hazelnut",
+      "Chef Special"
+    ],
+    "name": "Holla Nutella Pancakes",
+    "categorySlug": "mini-pancakes",
+    "description": "Freshly baked warm mini pancakes drenched in rich, original Nutella hazelnut spread and topped with roasted hazelnut crunch.",
+    "price": 219,
+    "originalPrice": 249,
+    "image": "https://i.pinimg.com/736x/ca/e4/3f/cae43f6251ebf68fd5dd5abbd9870737.jpg",
+    "slug": "holla-nutella-pancakes",
+    "category": "9d72be125b669e905bf47942",
+    "_id": "dd1a3992077efe412b654c19",
+    "createdAt": "2026-09-24T16:29:17.247Z",
+    "updatedAt": "2026-09-24T16:29:17.272Z"
+  },
+  {
+    "images": [
+      "https://i.pinimg.com/736x/68/8b/a9/688ba99da1ccb3a5edbf73c023834531.jpg"
+    ],
+    "rating": 4.8,
+    "reviewCount": 198,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": true,
+    "prepTime": "10-15 mins",
+    "calories": "450 kcal",
+    "tags": [
+      "Dark Chocolate",
+      "Belgian",
+      "Top Rated"
+    ],
+    "name": "Choco Lovely Pancakes",
+    "categorySlug": "mini-pancakes",
+    "description": "A chocolate lover’s dream! 12 mini pancakes loaded with dark, milk, and white melted Belgian chocolate drizzles.",
+    "price": 229,
+    "originalPrice": 269,
+    "image": "https://i.pinimg.com/736x/68/8b/a9/688ba99da1ccb3a5edbf73c023834531.jpg",
+    "slug": "choco-lovely-pancakes",
+    "category": "9d72be125b669e905bf47942",
+    "_id": "29140087e0ca9887a490aaeb",
+    "createdAt": "2026-09-24T16:29:17.248Z",
+    "updatedAt": "2026-09-24T16:29:17.248Z"
+  },
+  {
+    "images": [
+      "https://i.pinimg.com/1200x/7d/58/94/7d58946df9444f03da1b8b840eacd819.jpg"
+    ],
+    "rating": 4.7,
+    "reviewCount": 96,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": false,
+    "prepTime": "15 mins",
+    "calories": "410 kcal",
+    "tags": [
+      "Red Velvet",
+      "Cream Cheese",
+      "Premium"
+    ],
+    "name": "Red Velvet Pancake",
+    "categorySlug": "mini-pancakes",
+    "description": "Signature crimson red mini pancakes served with sweet cream cheese frosting, white chocolate chips, and edible gold dust.",
+    "price": 239,
+    "originalPrice": 279,
+    "image": "https://i.pinimg.com/1200x/7d/58/94/7d58946df9444f03da1b8b840eacd819.jpg",
+    "slug": "red-velvet-pancake",
+    "category": "9d72be125b669e905bf47942",
+    "_id": "84815dba134da10f53e32959",
+    "createdAt": "2026-09-24T16:29:17.249Z",
+    "updatedAt": "2026-09-24T16:29:17.249Z"
+  },
+  {
+    "images": [
+      "https://images.unsplash.com/photo-1554520735-0a6b8b6ce8b7?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 4.6,
+    "reviewCount": 84,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": false,
+    "prepTime": "10 mins",
+    "calories": "340 kcal",
+    "tags": [
+      "Classic",
+      "Maple Syrup",
+      "Breakfast"
+    ],
+    "name": "Maple Lady Pancakes",
+    "categorySlug": "mini-pancakes",
+    "description": "Traditional light & airy mini pancakes served with a generous scoop of whipped salted butter and pure Canadian maple syrup.",
+    "price": 179,
+    "originalPrice": 199,
+    "image": "https://images.unsplash.com/photo-1554520735-0a6b8b6ce8b7?auto=format&fit=crop&w=800&q=80",
+    "slug": "maple-lady-pancakes",
+    "category": "9d72be125b669e905bf47942",
+    "_id": "ca5ae72d351ab50255a92e8d",
+    "createdAt": "2026-09-24T16:29:17.250Z",
+    "updatedAt": "2026-09-24T16:29:17.250Z"
+  },
+  {
+    "images": [
+      "https://i.pinimg.com/736x/22/32/23/2232231ebcd869b128589a7da85e6c6a.jpg"
+    ],
+    "rating": 4.9,
+    "reviewCount": 215,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": true,
+    "prepTime": "12 mins",
+    "calories": "390 kcal",
+    "tags": [
+      "Crispy",
+      "Dark Chocolate",
+      "Must Try"
+    ],
+    "name": "Choco Heaven Waffle",
+    "categorySlug": "waffles",
+    "description": "Crispy waffle grid smothered in 70% pure dark Belgian chocolate ganache and dusted with cocoa powder.",
+    "price": 189,
+    "originalPrice": 219,
+    "image": "https://i.pinimg.com/736x/22/32/23/2232231ebcd869b128589a7da85e6c6a.jpg",
+    "slug": "choco-heaven-waffle",
+    "category": "1fc697e9ba129ad5e28bbe9c",
+    "_id": "50e6f73324f400eaaefb1414",
+    "createdAt": "2026-09-24T16:29:17.251Z",
+    "updatedAt": "2026-09-24T16:29:17.251Z"
+  },
+  {
+    "images": [
+      "https://i.pinimg.com/1200x/3f/3a/cc/3f3acc7adc9a7816600087c57632cec0.jpg"
+    ],
+    "rating": 4.8,
+    "reviewCount": 167,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": true,
+    "prepTime": "12 mins",
+    "calories": "460 kcal",
+    "tags": [
+      "Biscoff",
+      "Caramel",
+      "Trending"
+    ],
+    "name": "Biscoff Caramel Waffle",
+    "categorySlug": "waffles",
+    "description": "Warm golden waffle layered with Lotus Biscoff spread, crushed Biscoff biscuit crumbles, and salted caramel drizzle.",
+    "price": 219,
+    "originalPrice": 249,
+    "image": "https://i.pinimg.com/1200x/3f/3a/cc/3f3acc7adc9a7816600087c57632cec0.jpg",
+    "slug": "biscoff-caramel-waffle",
+    "category": "1fc697e9ba129ad5e28bbe9c",
+    "_id": "ac2d7b6b6cbf8b48b45af374",
+    "createdAt": "2026-09-24T16:29:17.252Z",
+    "updatedAt": "2026-09-24T16:29:17.252Z"
+  },
+  {
+    "images": [
+      "https://i.pinimg.com/1200x/1a/04/39/1a0439165b40c56dedc34fdf4cf745bd.jpg"
+    ],
+    "rating": 4.5,
+    "reviewCount": 72,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": false,
+    "prepTime": "10 mins",
+    "calories": "380 kcal",
+    "tags": [
+      "Oreo",
+      "Cream",
+      "Sweet"
+    ],
+    "name": "Oreo and Cream Waffle",
+    "categorySlug": "waffles",
+    "description": "Crispy waffle grid loaded with crushed Oreo cookies, white chocolate ganache, and dark chocolate drizzle.",
+    "price": 199,
+    "originalPrice": 229,
+    "image": "https://i.pinimg.com/1200x/1a/04/39/1a0439165b40c56dedc34fdf4cf745bd.jpg",
+    "slug": "oreo-and-cream-waffle",
+    "category": "1fc697e9ba129ad5e28bbe9c",
+    "_id": "d65264d796637ea446a8faa1",
+    "createdAt": "2026-09-24T16:29:17.254Z",
+    "updatedAt": "2026-09-24T16:29:17.254Z"
+  },
+  {
+    "images": [
+      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 4.9,
+    "reviewCount": 310,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": true,
+    "prepTime": "20 mins",
+    "calories": "850 kcal",
+    "tags": [
+      "Celebration",
+      "Truffle",
+      "Party"
+    ],
+    "name": "Dutch Chocolate Overload Cake",
+    "categorySlug": "cakes",
+    "description": "Moist multi-layered chocolate sponge coated with rich Dutch truffle chocolate and chocolate curls.",
+    "price": 549,
+    "originalPrice": 629,
+    "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+    "slug": "dutch-chocolate-overload-cake",
+    "category": "243d8f82ec66054e03ad36e4",
+    "_id": "b5d69534664bbf7d9be519ad",
+    "createdAt": "2026-09-24T16:29:17.255Z",
+    "updatedAt": "2026-09-24T16:29:17.255Z"
+  },
+  {
+    "images": [
+      "https://i.pinimg.com/736x/45/d3/58/45d3581e50eeae53775621361460b80d.jpg"
+    ],
+    "rating": 4.9,
+    "reviewCount": 189,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": true,
+    "prepTime": "25 mins",
+    "calories": "980 kcal",
+    "tags": [
+      "Ferrero",
+      "Showstopper",
+      "Luxury"
+    ],
+    "name": "Ferrero Rocher Cake",
+    "categorySlug": "cakes",
+    "description": "A magnificent multi-layer cake layered with Rocher chocolate cream, roasted hazelnuts, and whole Ferrero Rocher pralines.",
+    "price": 649,
+    "originalPrice": 749,
+    "image": "https://i.pinimg.com/736x/45/d3/58/45d3581e50eeae53775621361460b80d.jpg",
+    "slug": "ferrero-rocher-cake",
+    "category": "243d8f82ec66054e03ad36e4",
+    "_id": "e8e8d7833e4b9f0d88cca416",
+    "createdAt": "2026-09-24T16:29:17.256Z",
+    "updatedAt": "2026-09-24T16:29:17.256Z"
+  },
+  {
+    "images": [
+      "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 4.7,
+    "reviewCount": 88,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": false,
+    "prepTime": "5 mins",
+    "calories": "310 kcal",
+    "tags": [
+      "Truffle",
+      "Pastry",
+      "Eggless"
+    ],
+    "name": "Chocolate Truffle Pastry Slices",
+    "categorySlug": "pastries",
+    "description": "Rich & velvety eggless dark chocolate truffle pastry slice dusted with dark cocoa.",
+    "price": 139,
+    "originalPrice": 159,
+    "image": "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&w=800&q=80",
+    "slug": "chocolate-truffle-pastry-slices",
+    "category": "f3211cc134bb158d1ab628dd",
+    "_id": "095c185736ba865bc9072e6c",
+    "createdAt": "2026-09-24T16:29:17.257Z",
+    "updatedAt": "2026-09-24T16:29:17.257Z"
+  },
+  {
+    "images": [
+      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 4.8,
+    "reviewCount": 145,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": false,
+    "prepTime": "8 mins",
+    "calories": "380 kcal",
+    "tags": [
+      "Walnut",
+      "Warm",
+      "Fudgy"
+    ],
+    "name": "Sizzling Walnut Brownie",
+    "categorySlug": "brownies",
+    "description": "Fudgy dark chocolate brownie packed with toasted Californian walnuts, served warm with rich dark chocolate fudge syrup.",
+    "price": 159,
+    "originalPrice": 189,
+    "image": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
+    "slug": "sizzling-walnut-brownie",
+    "category": "1d0c260a6b21b8a0f004722a",
+    "_id": "321163d9edc9b96977fb7e43",
+    "createdAt": "2026-09-24T16:29:17.258Z",
+    "updatedAt": "2026-09-24T16:29:17.258Z"
+  },
+  {
+    "images": [
+      "https://i.pinimg.com/1200x/14/7f/aa/147faab9cc042e0bc2745eb13c8bbe15.jpg"
+    ],
+    "rating": 4.9,
+    "reviewCount": 164,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": true,
+    "prepTime": "10 mins",
+    "calories": "490 kcal",
+    "tags": [
+      "Caramel",
+      "Sundae",
+      "Indulgent"
+    ],
+    "name": "Salted Caramel Brownie Sundae",
+    "categorySlug": "brownies",
+    "description": "Warm fudgy chocolate brownie layered with vanilla bean ice cream, hot caramel fudge, and toasted pecans.",
+    "price": 219,
+    "originalPrice": 259,
+    "image": "https://i.pinimg.com/1200x/14/7f/aa/147faab9cc042e0bc2745eb13c8bbe15.jpg",
+    "slug": "salted-caramel-brownie-sundae",
+    "category": "1d0c260a6b21b8a0f004722a",
+    "_id": "b356ec83c6fd9556ceb799d2",
+    "createdAt": "2026-09-24T16:29:17.259Z",
+    "updatedAt": "2026-09-24T16:29:17.259Z"
+  },
+  {
+    "images": [
+      "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 4.7,
+    "reviewCount": 230,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": true,
+    "prepTime": "7 mins",
+    "calories": "520 kcal",
+    "tags": [
+      "Oreo",
+      "Thickshake",
+      "Popular"
+    ],
+    "name": "Oreo Monster Thickshake",
+    "categorySlug": "milkshakes",
+    "description": "Ultra-creamy vanilla ice cream blended with crushed Oreo cookies, chocolate sauce, topped with whipped cream & whole Oreos.",
+    "price": 199,
+    "originalPrice": 229,
+    "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80",
+    "slug": "oreo-monster-thickshake",
+    "category": "3a8d079f57c4e6070a93c667",
+    "_id": "32a0529b830646d45bbffae9",
+    "createdAt": "2026-09-24T16:29:17.260Z",
+    "updatedAt": "2026-09-24T16:29:17.260Z"
+  },
+  {
+    "images": [
+      "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 4.9,
+    "reviewCount": 178,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": true,
+    "prepTime": "6 mins",
+    "calories": "280 kcal",
+    "tags": [
+      "Hot Chocolate",
+      "Comfort",
+      "Belgian"
+    ],
+    "name": "Belgian Hot Chocolate",
+    "categorySlug": "hot-drinks",
+    "description": "Slow-simmered whole milk infused with pure melted 54% dark Belgian chocolate and topped with miniature marshmallows.",
+    "price": 149,
+    "originalPrice": 169,
+    "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80",
+    "slug": "belgian-hot-chocolate",
+    "category": "6af709344863983baec66b7e",
+    "_id": "c550a569024cb83763d59900",
+    "createdAt": "2026-09-24T16:29:17.261Z",
+    "updatedAt": "2026-09-24T16:29:17.261Z"
+  },
+  {
+    "images": [
+      "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 4.6,
+    "reviewCount": 112,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": false,
+    "prepTime": "5 mins",
+    "calories": "310 kcal",
+    "tags": [
+      "Coffee",
+      "Hazelnut",
+      "Chilled"
+    ],
+    "name": "Hazelnut Cold Coffee Shake",
+    "categorySlug": "cold-drinks",
+    "description": "Smooth espresso cold brew shaken with vanilla ice cream, roasted hazelnut syrup, and cocoa powder garnish.",
+    "price": 169,
+    "originalPrice": 189,
+    "image": "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=800&q=80",
+    "slug": "hazelnut-cold-coffee-shake",
+    "category": "b55c5ba13dd470c398aeed85",
+    "_id": "06fb4b9f6d2be0e538515439",
+    "createdAt": "2026-09-24T16:29:17.262Z",
+    "updatedAt": "2026-09-24T16:29:17.262Z"
+  },
+  {
+    "images": [
+      "https://i.pinimg.com/736x/86/d6/3c/86d63cd3bf0f44df95a5d84f751b9d6d.jpg"
+    ],
+    "rating": 4.9,
+    "reviewCount": 61,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": true,
+    "prepTime": "10 mins",
+    "calories": "480 kcal",
+    "tags": [
+      "Nutella",
+      "Waffle",
+      "Bestseller"
+    ],
+    "name": "Naughty Nutella Waffles",
+    "categorySlug": "waffles",
+    "description": "Fresh waffle cake topped with rich Nutella and dark Belgian chocolate sprinkles.",
+    "price": 299,
+    "originalPrice": 329,
+    "image": "https://i.pinimg.com/736x/86/d6/3c/86d63cd3bf0f44df95a5d84f751b9d6d.jpg",
+    "slug": "naughty-nutella-waffles",
+    "category": "1fc697e9ba129ad5e28bbe9c",
+    "_id": "6fc54b615aa6915b5688352c",
+    "createdAt": "2026-09-24T16:29:17.264Z",
+    "updatedAt": "2026-09-24T16:29:17.264Z"
+  },
+  {
+    "images": [
+      "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=800&q=80"
+    ],
+    "rating": 5,
+    "reviewCount": 1,
+    "isVeg": true,
+    "isAvailable": true,
+    "stock": 50,
+    "featured": true,
+    "prepTime": "15 mins",
+    "calories": "940 kcal",
+    "tags": [
+      "Combo",
+      "Value Meal",
+      "Saver"
+    ],
+    "name": "Pancake & Shake Feast Combo",
+    "categorySlug": "combos",
+    "description": "12 Holla Nutella Mini Pancakes + 1 Oreo Monster Thickshake at an irresistible combo discount.",
+    "price": 369,
+    "originalPrice": 418,
+    "image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=800&q=80",
+    "slug": "pancake-shake-feast-combo",
+    "category": "48fcc98e17cca9c06c11578e",
+    "_id": "be54f16aac0906dff7871649",
+    "createdAt": "2026-09-24T16:29:17.265Z",
+    "updatedAt": "2026-09-24T16:32:01.979Z"
+  }
+]

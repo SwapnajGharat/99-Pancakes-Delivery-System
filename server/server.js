@@ -5,7 +5,6 @@ import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 
 import { env } from './config/env.js';
-import { connectDB } from './config/db.js';
 
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
@@ -80,18 +79,16 @@ app.use(notFound);
 // Centralized Error Middleware
 app.use(errorHandler);
 
-// Connect to Database & Start Server
+// Start server; JSON files are opened lazily by the storage utility.
 const PORT = env.PORT || 5000;
 
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`==================================================`);
-    console.log(`🥞 99 Pancakes Panvel API Server Running`);
-    console.log(`📍 Environment : ${env.NODE_ENV}`);
-    console.log(`🌐 Port        : ${PORT}`);
-    console.log(`🔗 Health Check: http://localhost:${PORT}/api/health`);
-    console.log(`==================================================`);
-  });
+app.listen(PORT, () => {
+  console.log(`==================================================`);
+  console.log(`🥞 99 Pancakes Panvel API Server Running`);
+  console.log(`📍 Environment : ${env.NODE_ENV}`);
+  console.log(`🌐 Port        : ${PORT}`);
+  console.log(`🔗 Health Check: http://localhost:${PORT}/api/health`);
+  console.log(`==================================================`);
 });
 
 export default app;

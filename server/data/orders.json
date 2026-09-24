@@ -1,0 +1,105 @@
+[
+  {
+    "deliveryFee": 0,
+    "discount": 0,
+    "paymentMethod": "COD",
+    "paymentStatus": "PENDING",
+    "orderStatus": "CANCELLED",
+    "user": "e2477362eedd1622bf0eb4b4",
+    "items": [
+      {
+        "product": "be54f16aac0906dff7871649",
+        "name": "Pancake & Shake Feast Combo",
+        "image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=800&q=80",
+        "price": 369,
+        "quantity": 2
+      }
+    ],
+    "shippingAddress": {
+      "fullName": "Test Customer",
+      "phone": "9820012345",
+      "addressLine": "Flat 101, Sector 15, New Panvel East",
+      "landmark": "",
+      "city": "Panvel",
+      "state": "Maharashtra",
+      "pincode": "410206",
+      "type": "Home"
+    },
+    "subtotal": 738,
+    "total": 775,
+    "_id": "d751938694e1bbaa75a30f2c",
+    "createdAt": "2026-09-24T16:30:58.896Z",
+    "updatedAt": "2026-09-24T16:30:58.921Z"
+  },
+  {
+    "deliveryFee": 0,
+    "discount": 0,
+    "paymentMethod": "COD",
+    "paymentStatus": "PENDING",
+    "orderStatus": "CANCELLED",
+    "user": "e2477362eedd1622bf0eb4b4",
+    "items": [
+      {
+        "product": "be54f16aac0906dff7871649",
+        "name": "Pancake & Shake Feast Combo",
+        "image": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=800&q=80",
+        "price": 369,
+        "quantity": 2
+      }
+    ],
+    "shippingAddress": {
+      "fullName": "Test Customer",
+      "phone": "9820012345",
+      "addressLine": "Flat 101, Sector 15, New Panvel East",
+      "landmark": "",
+      "city": "Panvel",
+      "state": "Maharashtra",
+      "pincode": "410206",
+      "type": "Home"
+    },
+    "subtotal": 738,
+    "total": 775,
+    "_id": "11906d30e3c68dbbbbce8d1a",
+    "createdAt": "2026-09-24T16:31:42.416Z",
+    "updatedAt": "2026-09-24T16:31:42.437Z"
+  },
+  {
+    "deliveryFee": 0,
+    "discount": 0,
+    "paymentMethod": "COD",
+    "paymentStatus": "PENDING",
+    "orderStatus": "PENDING",
+    "user": "a71e57f6e16ad10c39f29895",
+    "items": [
+      {
+        "product": "b5d69534664bbf7d9be519ad",
+        "name": "Dutch Chocolate Overload Cake",
+        "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+        "price": 549,
+        "quantity": 1
+      },
+      {
+        "product": "32a0529b830646d45bbffae9",
+        "name": "Oreo Monster Thickshake",
+        "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80",
+        "price": 199,
+        "quantity": 1
+      }
+    ],
+    "shippingAddress": {
+      "fullName": "99 Pancakes Admin",
+      "phone": "9876543210",
+      "addressLine": "yyjbnbf",
+      "landmark": "yjs",
+      "city": "Navi Mumbai",
+      "state": "Maharashtra",
+      "pincode": "410206",
+      "type": "Home"
+    },
+    "subtotal": 748,
+    "total": 785,
+    "_id": "3f0089e4bceb617cb8ab0a53",
+    "createdAt": "2026-09-24T16:35:50.744Z",
+    "updatedAt": "2026-09-24T16:35:50.744Z"
+  }
+]
